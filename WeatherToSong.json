@@ -1,0 +1,814 @@
+[
+    {
+        "id": "df46832cdf5ff0b1",
+        "type": "inject",
+        "z": "1866f93d72f4601c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 280,
+        "wires": [
+            [
+                "297b042718c9018c"
+            ]
+        ]
+    },
+    {
+        "id": "297b042718c9018c",
+        "type": "openweathermap",
+        "z": "1866f93d72f4601c",
+        "name": "",
+        "wtype": "current",
+        "lon": "",
+        "lat": "",
+        "city": "",
+        "country": "",
+        "language": "en",
+        "x": 390,
+        "y": 280,
+        "wires": [
+            [
+                "8595d54c4f66330e",
+                "1b46a06e1eb4ab87"
+            ]
+        ]
+    },
+    {
+        "id": "232e52389035ab3c",
+        "type": "debug",
+        "z": "1866f93d72f4601c",
+        "name": "OUT Tempc",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1130,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "42e8666eedd818f2",
+        "type": "switch",
+        "z": "1866f93d72f4601c",
+        "name": "Temperature Range",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lte",
+                "v": "10",
+                "vt": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "11",
+                "vt": "num",
+                "v2": "24",
+                "v2t": "num"
+            },
+            {
+                "t": "gte",
+                "v": "25",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 900,
+        "y": 360,
+        "wires": [
+            [
+                "1b013e1abd70a915",
+                "232e52389035ab3c"
+            ],
+            [
+                "35bb546310630762",
+                "232e52389035ab3c"
+            ],
+            [
+                "b66a7f22a89f5516",
+                "232e52389035ab3c"
+            ]
+        ]
+    },
+    {
+        "id": "75877f27ac18b666",
+        "type": "switch",
+        "z": "1866f93d72f4601c",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "tempc",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 690,
+        "y": 280,
+        "wires": [
+            [
+                "42e8666eedd818f2"
+            ]
+        ]
+    },
+    {
+        "id": "1b013e1abd70a915",
+        "type": "http request",
+        "z": "1866f93d72f4601c",
+        "name": "Classical",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "rapidapi.com/search?q=classical",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "other",
+                "keyValue": "X-Rapidapi-Key",
+                "valueType": "other",
+                "valueValue": ""
+            },
+            {
+                "keyType": "other",
+                "keyValue": "X-Rapidapi-Host",
+                "valueType": "other",
+                "valueValue": "deezerdevs-deezer.p.rapidapi.com"
+            },
+            {
+                "keyType": "other",
+                "keyValue": "Host",
+                "valueType": "other",
+                "valueValue": "deezerdevs-deezer.p.rapidapi.com"
+            }
+        ],
+        "x": 1120,
+        "y": 280,
+        "wires": [
+            [
+                "8b7a8f596a252fd3",
+                "5dd7b1168c81f812"
+            ]
+        ]
+    },
+    {
+        "id": "35bb546310630762",
+        "type": "http request",
+        "z": "1866f93d72f4601c",
+        "name": "Pop",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "rapidapi.com/search?q=pop",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "other",
+                "keyValue": "X-Rapidapi-Key",
+                "valueType": "other",
+                "valueValue": ""
+            },
+            {
+                "keyType": "other",
+                "keyValue": "X-Rapidapi-Host",
+                "valueType": "other",
+                "valueValue": "deezerdevs-deezer.p.rapidapi.com"
+            },
+            {
+                "keyType": "other",
+                "keyValue": "Host",
+                "valueType": "other",
+                "valueValue": "deezerdevs-deezer.p.rapidapi.com"
+            }
+        ],
+        "x": 1110,
+        "y": 340,
+        "wires": [
+            [
+                "8b7a8f596a252fd3",
+                "5dd7b1168c81f812"
+            ]
+        ]
+    },
+    {
+        "id": "b66a7f22a89f5516",
+        "type": "http request",
+        "z": "1866f93d72f4601c",
+        "name": "Eletronic",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "rapidapi.com/search?q=electronic",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "other",
+                "keyValue": "X-Rapidapi-Key",
+                "valueType": "other",
+                "valueValue": ""
+            },
+            {
+                "keyType": "other",
+                "keyValue": "X-Rapidapi-Host",
+                "valueType": "other",
+                "valueValue": "deezerdevs-deezer.p.rapidapi.com"
+            },
+            {
+                "keyType": "other",
+                "keyValue": "Host",
+                "valueType": "other",
+                "valueValue": "deezerdevs-deezer.p.rapidapi.com"
+            }
+        ],
+        "x": 1120,
+        "y": 400,
+        "wires": [
+            [
+                "8b7a8f596a252fd3",
+                "5dd7b1168c81f812"
+            ]
+        ]
+    },
+    {
+        "id": "2eb654a1f51070b5",
+        "type": "comment",
+        "z": "1866f93d72f4601c",
+        "name": "Informações de Tempo",
+        "info": "Recolhe todas as informações de tempo das\nlocalizações",
+        "x": 320,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "78be0a282d99ad86",
+        "type": "comment",
+        "z": "1866f93d72f4601c",
+        "name": "Informações da Temperatura",
+        "info": "Filtra as informações e recolhe só os dados\ntemperatura atual do local (tempc)",
+        "x": 600,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "b7a4eeb397a4be05",
+        "type": "comment",
+        "z": "1866f93d72f4601c",
+        "name": "Relação entre temperatura e música",
+        "info": "Separa as temperaturas em três grupos e \nconforme a temperatura está associado a \numa pesquisa sobre música",
+        "x": 980,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "631b6d3f6445213c",
+        "type": "osc",
+        "z": "1866f93d72f4601c",
+        "name": "Title",
+        "path": "/title",
+        "metadata": false,
+        "x": 1870,
+        "y": 280,
+        "wires": [
+            [
+                "b98da4d8cbf72b3d"
+            ]
+        ]
+    },
+    {
+        "id": "b98da4d8cbf72b3d",
+        "type": "udp out",
+        "z": "1866f93d72f4601c",
+        "name": "",
+        "addr": "127.0.0.1",
+        "iface": "",
+        "port": "3333",
+        "ipv": "udp4",
+        "outport": "",
+        "base64": false,
+        "multicast": "false",
+        "x": 2070,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "5dd7b1168c81f812",
+        "type": "debug",
+        "z": "1866f93d72f4601c",
+        "name": "OUT Search",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1350,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "8b7a8f596a252fd3",
+        "type": "function",
+        "z": "1866f93d72f4601c",
+        "name": "Song Title and Link",
+        "func": "// Determina qual objeto do array vai ler\nvar i = Math.floor(Math.random() * msg.payload.data.length);\n\n//Vê os dados do index gerado anteriormente\nvar dadosIndex = msg.payload.data[i];\nvar mp3 = dadosIndex.preview;\nvar image = dadosIndex.album.cover;\nvar title = dadosIndex.title;\nvar artist = dadosIndex.artist.name\n//Vai buscar o título da música\nmsg.payload = {\n    title: title,\n    link : mp3,\n    cover: image,\n    artist: artist\n};\n\n//Retorna a mensagem\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1370,
+        "y": 320,
+        "wires": [
+            [
+                "9d50446852617a44",
+                "d7862a4c7efd337a"
+            ]
+        ]
+    },
+    {
+        "id": "f6fc68c20466d8fb",
+        "type": "comment",
+        "z": "1866f93d72f4601c",
+        "name": "Seleciona uma música e o seu ficheiro mp3 no array",
+        "info": "",
+        "x": 1350,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "c5f829882df3e91d",
+        "type": "comment",
+        "z": "1866f93d72f4601c",
+        "name": "Transmite a informação para o touchdesigner/madmapper",
+        "info": "",
+        "x": 2010,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "d5ec7a7a3c97873b",
+        "type": "osc",
+        "z": "1866f93d72f4601c",
+        "name": "Link",
+        "path": "/link",
+        "metadata": false,
+        "x": 1870,
+        "y": 320,
+        "wires": [
+            [
+                "6839d6c798c88f2e"
+            ]
+        ]
+    },
+    {
+        "id": "6839d6c798c88f2e",
+        "type": "udp out",
+        "z": "1866f93d72f4601c",
+        "name": "",
+        "addr": "127.0.0.1",
+        "iface": "",
+        "port": "9999",
+        "ipv": "udp4",
+        "outport": "",
+        "base64": false,
+        "multicast": "false",
+        "x": 2070,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "9d50446852617a44",
+        "type": "debug",
+        "z": "1866f93d72f4601c",
+        "name": "OUT Titulo e Link",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1610,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "8595d54c4f66330e",
+        "type": "split",
+        "z": "1866f93d72f4601c",
+        "name": "",
+        "splt": ",",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "topic",
+        "x": 550,
+        "y": 280,
+        "wires": [
+            [
+                "75877f27ac18b666"
+            ]
+        ]
+    },
+    {
+        "id": "d7862a4c7efd337a",
+        "type": "split",
+        "z": "1866f93d72f4601c",
+        "name": "",
+        "splt": ",",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "topic",
+        "x": 1570,
+        "y": 320,
+        "wires": [
+            [
+                "0880838142e90566"
+            ]
+        ]
+    },
+    {
+        "id": "0880838142e90566",
+        "type": "switch",
+        "z": "1866f93d72f4601c",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "title",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "link",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "artist",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "cover",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 1710,
+        "y": 320,
+        "wires": [
+            [
+                "631b6d3f6445213c",
+                "b149c3d8cd889a9a",
+                "32d8fb16a1cb6f0a"
+            ],
+            [
+                "d5ec7a7a3c97873b",
+                "b149c3d8cd889a9a"
+            ],
+            [
+                "01da9970d8bede78"
+            ],
+            [
+                "c6a12e1f02328ded"
+            ]
+        ]
+    },
+    {
+        "id": "b149c3d8cd889a9a",
+        "type": "debug",
+        "z": "1866f93d72f4601c",
+        "name": "Saída 1- title, Saída 2 - link",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1940,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "3ed6febf8b621fc8",
+        "type": "comment",
+        "z": "1866f93d72f4601c",
+        "name": "Separa a informação para mandar para cada saída",
+        "info": "",
+        "x": 1590,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "a13b864cbfc618ac",
+        "type": "ui_form",
+        "z": "1866f93d72f4601c",
+        "name": "",
+        "label": "Pesquisar",
+        "group": "e77ecb3cea30253e",
+        "order": 1,
+        "width": 5,
+        "height": 4,
+        "options": [
+            {
+                "label": "Cidade",
+                "value": "city",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "País",
+                "value": "country",
+                "type": "text",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "city": "",
+            "country": ""
+        },
+        "payload": "",
+        "submit": "submeter",
+        "cancel": "cancelar",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 80,
+        "y": 360,
+        "wires": [
+            [
+                "c3ed8b51b521ac46"
+            ]
+        ]
+    },
+    {
+        "id": "c3ed8b51b521ac46",
+        "type": "function",
+        "z": "1866f93d72f4601c",
+        "name": "Pesquisa para payload",
+        "func": "// Definir objeto para conter campos de pesquisa\nvar msgLocal = {};\n// Dados do formulário\nmsgLocal.location = {\n    \"city\": msg.payload.city,\n    \"country\": msg.payload.city\n    };\n// Retornar mensagem\nreturn msgLocal;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 360,
+        "wires": [
+            [
+                "297b042718c9018c"
+            ]
+        ]
+    },
+    {
+        "id": "8b9255a4488eed76",
+        "type": "switch",
+        "z": "1866f93d72f4601c",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "tempc",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "weather",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 670,
+        "y": 440,
+        "wires": [
+            [
+                "303c650872481148"
+            ],
+            [
+                "6e9a89929a15f016"
+            ]
+        ]
+    },
+    {
+        "id": "1b46a06e1eb4ab87",
+        "type": "split",
+        "z": "1866f93d72f4601c",
+        "name": "",
+        "splt": ",",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "topic",
+        "x": 550,
+        "y": 440,
+        "wires": [
+            [
+                "8b9255a4488eed76"
+            ]
+        ]
+    },
+    {
+        "id": "303c650872481148",
+        "type": "ui_gauge",
+        "z": "1866f93d72f4601c",
+        "name": "",
+        "group": "e77ecb3cea30253e",
+        "order": 2,
+        "width": 5,
+        "height": 3,
+        "gtype": "wave",
+        "title": "Temperatura",
+        "label": "ºC",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 810,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "6e9a89929a15f016",
+        "type": "ui_text",
+        "z": "1866f93d72f4601c",
+        "group": "e77ecb3cea30253e",
+        "order": 3,
+        "width": 5,
+        "height": 1,
+        "name": "",
+        "label": "Tempo",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 790,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "32d8fb16a1cb6f0a",
+        "type": "ui_text",
+        "z": "1866f93d72f4601c",
+        "group": "e77ecb3cea30253e",
+        "order": 6,
+        "width": 5,
+        "height": 2,
+        "name": "",
+        "label": "Título",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1870,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "01da9970d8bede78",
+        "type": "ui_text",
+        "z": "1866f93d72f4601c",
+        "group": "e77ecb3cea30253e",
+        "order": 4,
+        "width": 5,
+        "height": 2,
+        "name": "",
+        "label": "Artista",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1870,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "a49f756866f6f46f",
+        "type": "ui_iframe",
+        "z": "1866f93d72f4601c",
+        "group": "e77ecb3cea30253e",
+        "name": "",
+        "order": 5,
+        "width": 5,
+        "height": 4,
+        "url": "",
+        "origin": "*",
+        "scale": "100",
+        "x": 2050,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c6a12e1f02328ded",
+        "type": "change",
+        "z": "1866f93d72f4601c",
+        "name": "set URL",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1880,
+        "y": 460,
+        "wires": [
+            [
+                "a49f756866f6f46f"
+            ]
+        ]
+    },
+    {
+        "id": "e77ecb3cea30253e",
+        "type": "ui_group",
+        "name": "Local",
+        "tab": "50cb412f831bb303",
+        "order": 1,
+        "disp": true,
+        "width": 10,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "50cb412f831bb303",
+        "type": "ui_tab",
+        "name": "Weather to Song",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
